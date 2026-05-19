@@ -36,7 +36,7 @@
                     "lookup": "properties.NAME",
                     "from": {
                         "data": {
-                            "url": "../f1-data/country_counts.csv"
+                            "url": "./f1-data/country_counts.csv"
                         },
                         "key": "country",
                         "fields": [
