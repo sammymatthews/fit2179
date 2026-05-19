@@ -1,0 +1,70 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "F1 Driver Nationalities",
+    "width": "container",
+    "height": "container",
+    "autosize": {"type": "fit"},
+    "background": "transparent",
+    "projection": {
+        "type": "equalEarth"
+    },
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_admin_0_countries"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "white", 
+                "stroke": "lightgray"
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_admin_0_countries"
+                }
+            },
+            "transform": [
+                {
+                    "lookup": "properties.NAME",
+                    "from": {
+                        "data": {
+                            "url": "../f1-data/country_counts.csv"
+                        },
+                        "key": "country",
+                        "fields": [
+                            "country",
+                            "driver_count"
+                        ]
+                    }
+                }
+            ],
+            "mark": {
+                "type": "geoshape"
+            },
+            "encoding": {
+                "color": {
+                    "field": "driver_count",
+                    "type": "quantitative"
+                },
+                "tooltip": [
+                    {
+                        "field": "country",
+                        "title": "Country"
+                    },
+                    {
+                        "field": "driver_count",
+                        "title": "Driver Count"
+                    }
+                ]
+            }
+        }
+    ]
+}

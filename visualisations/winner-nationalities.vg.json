@@ -1,0 +1,94 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Winner Driver Nationalities (2000-2024)",
+    "width": "container",
+    "height": "container",
+    "autosize": {
+        "type": "fit"
+    },
+    "data": {
+        "url": "../f1-data/driver_standings.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "lookup": "raceId",
+            "from": {
+                "data": {
+                    "url": "../f1-data/races.csv"
+                },
+                "key": "raceId",
+                "fields": [
+                    "year",
+                    "round"
+                ]
+            }
+        },
+        {
+            "calculate": "toNumber(datum.round)",
+            "as": "round"
+        },
+        {
+            "filter": "datum.position == '1'"
+        },
+        {
+            "joinaggregate": [
+                {
+                    "op": "max",
+                    "field": "round",
+                    "as": "finalRound"
+                }
+            ],
+            "groupby": [
+                "year"
+            ]
+        },
+        {
+            "filter": "toNumber(datum.round) == toNumber(datum.finalRound) && toNumber(datum.year) >= 2000"
+        },
+        {
+            "lookup": "driverId",
+            "from": {
+                "data": {
+                    "url": "../f1-data/drivers.csv"
+                },
+                "key": "driverId",
+                "fields": [
+                    "nationality"
+                ]
+            }
+        },
+        {
+            "aggregate": [
+                {
+                    "op": "count",
+                    "field": "positionOrder",
+                    "as": "totalWins"
+                }
+            ],
+            "groupby": [
+                "nationality"
+            ]
+        }
+    ],
+    "mark": {
+        "type": "arc"
+    },
+    "encoding": {
+        "theta": {
+            "field": "totalWins",
+            "type": "quantitative"
+        },
+        "color": {
+            "field": "nationality",
+            "type": "nominal"
+        },
+        "order": {
+            "field": "totalWins",
+            "type": "quantitative",
+            "sort": "descending"
+        }
+    }
+}

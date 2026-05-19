@@ -1,0 +1,61 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "F1 Circuits",
+    "width": "container",
+    "height": "container",
+    "autosize": {"type": "fit"},
+    "background": "transparent",
+    "projection": {"type": "equalEarth"},
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+                "format": {
+                    "type": "topojson", 
+                    "feature": "ne_110m_admin_0_countries"
+                }
+            },
+            "mark": {
+                "type": "geoshape", 
+                "fill": "white", 
+                "stroke": "lightgray"
+            }
+        },
+        {
+            "data": {
+                "url": "../f1-data/circuits.csv",
+                "format": {"type": "csv"}
+            },
+            "mark": {
+                "type": "circle", 
+                "tooltip": {"content": "data"}
+            },
+            "encoding": {
+                "longitude": {
+                    "field": "lng", 
+                    "type": "quantitative"
+                },
+                "latitude": {
+                    "field": "lat", 
+                    "type": "quantitative"
+                }
+                
+            }
+
+        },
+        {
+            "data": {
+                "url": "../f1-data/circuits.csv",
+                "format": {"type": "csv"}
+            },
+            "mark": {
+                "type": "geoshape"
+            },
+            "encoding": {
+                "color": {
+                    "type": "quantitative"
+                }
+            }
+        }
+    ]
+}

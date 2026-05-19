@@ -1,0 +1,77 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Top 10 Grand Prix Winners (Drivers)",
+    "width": "container",
+    "height": "container",
+    "autosize": {"type": "fit", "contains": "padding"},
+    "data": {
+        "url": "../f1-data/results.csv",
+        "format": {"type": "csv"}
+    },
+
+    "transform": [
+        {
+            "lookup": "driverId",
+            "from": {
+                "data": {"url": "../f1-data/drivers.csv"},
+                "key": "driverId",
+                "fields": ["forename", "surname"]
+            },
+            "as": ["driverForename", "driverSurname"]
+        },
+        {
+            "calculate": "datum.driverForename + ' ' + datum.driverSurname",
+            "as": "driverName"
+        },
+        {
+            "filter": "datum.positionOrder == 1"
+        },
+        {
+            "aggregate": [{
+                "op": "sum",
+                "field": "positionOrder",
+                "as": "totalWins"
+            }],
+            "groupby": ["driverName"]
+        },
+        {
+            "window": [{"op": "rank", "field": "totalWins", "as": "driverRank"}],
+            "sort": [{"field": "totalWins", "order": "descending"}]
+        },
+        {
+            "filter": "datum.driverRank <= 10"
+        }
+
+    ],
+    "mark": {"type": "bar"},
+    "encoding": {
+        "y": {
+            "field": "driverName",
+            "type": "nominal",
+            "sort": {
+                "field": "totalWins",
+                "op": "sum",
+                "order": "descending"
+            },
+            "title": "Driver Name"
+        },
+        "x": {
+            "field": "totalWins",
+            "type": "quantitative",
+            "title": "Total Grand Prix wins"
+
+        },
+        "tooltip": [
+            {
+                "field": "totalWins",
+                "title": "Total Grand Prix wins"
+            },
+            {
+                "field": "driverRank",
+                "title": "Rank"
+            }
+        ]
+    }
+
+    
+}

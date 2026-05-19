@@ -1,0 +1,59 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Driver Nationalities",
+    "width": "container",
+    "height": "container",
+    "autosize": {
+        "type": "fit"
+    },
+    "data": {
+        "url": "../f1-data/drivers_cleaned.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "aggregate": [
+                {
+                    "op": "count",
+                    "field": "driverId",
+                    "as": "totalDrivers"
+                }
+            ],
+            "groupby": [
+                "nationality"
+            ]
+        }
+    ],
+    "mark": {
+        "type": "bar"
+    },
+    "encoding": {
+        "y": {
+            "field": "nationality",
+            "type": "nominal",
+            "sort": {
+                "field": "totalDrivers",
+                "op": "sum",
+                "order": "descending"
+            },
+            "title": "Driver Nationality"
+        },
+        "x": {
+            "field": "totalDrivers",
+            "type": "quantitative",
+            "title": "Driver Count"
+        },
+        "tooltip": [
+            {
+                "field": "totalDrivers",
+                "title": "Driver Count"
+            },
+            {
+                "field": "nationality",
+                "title": "Nationality"
+            }
+        ]
+    }
+}

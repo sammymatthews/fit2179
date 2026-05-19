@@ -1,0 +1,128 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Proportion of Races Won",
+    "width": "container",
+    "height": "container",
+    "autosize": {
+        "type": "fit"
+    },
+    "background": "transparent",
+    "data": {
+        "url": "../f1-data/results.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "lookup": "driverId",
+            "from": {
+                "data": {
+                    "url": "../f1-data/drivers.csv"
+                },
+                "key": "driverId",
+                "fields": [
+                    "forename",
+                    "surname"
+                ]
+            },
+            "as": [
+                "driverForename",
+                "driverSurname"
+            ]
+        },
+        {
+            "calculate": "datum.driverForename + ' ' + datum.driverSurname",
+            "as": "driverName"
+        },
+        {
+            "filter": "datum.driverId == '1'"
+        },
+        {
+            "calculate": "datum.positionOrder == '1' ? 1 : 0",
+            "as": "isWin"
+        },
+        {
+            "joinaggregate": [
+                {
+                    "op": "count",
+                    "field": "raceId",
+                    "as": "totalRaces"
+                },
+                {
+                    "op": "sum",
+                    "field": "isWin",
+                    "as": "totalWins"
+                }
+            ],
+            "groupby": [
+                "driverId"
+            ]
+        },
+        {
+            "calculate": "datum.totalRaces - datum.totalWins",
+            "as": "totalLosses"
+        },
+        {
+            "fold": [
+                "totalWins",
+                "totalLosses"
+            ],
+            "as": [
+                "ResultType",
+                "RaceCount"
+            ]
+        },
+        {
+            "calculate": "datum.RaceCount / datum.totalRaces",
+            "as": "proportion"
+        },
+        {
+            "calculate": "datum.ResultType == 'totalWins' ? 'Races Won' : 'Races Lost'",
+            "as": "Outcome"
+        }
+    ],
+    "mark": {
+        "type": "arc",
+        "outerRadius": {"expr": "min(width, height) / 2"},
+        "innerRadius": {"expr": "min(width, height) / 4"}
+    },
+    "encoding": {
+        "theta": {
+            "field": "RaceCount",
+            "type": "quantitative"
+        },
+        "color": {
+            "field": "Outcome",
+            "type": "nominal",
+            "scale": {
+                "domain": [
+                    "Races Won",
+                    "Races Lost"
+                ],
+                "range": [
+                    "#4682B4",
+                    "#D3D3D3"
+                ]
+            }
+        },
+        "tooltip": [
+            {
+                "field": "Outcome",
+                "type": "nominal",
+                "title": "Result"
+            },
+            {
+                "field": "RaceCount",
+                "type": "quantitative",
+                "title": "Count"
+            },
+            {
+                "field": "proportion",
+                "type": "quantitative",
+                "format": ".1%",
+                "title": "Proportion"
+            }
+        ]
+    }
+}

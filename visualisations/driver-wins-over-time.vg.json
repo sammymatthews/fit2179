@@ -1,0 +1,78 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Driver wins over time",
+    "width": "container",
+    "height": "container",
+    "autosize": {"type": "fit"},
+    "background": "transparent",
+    "data": {
+        "url": "../f1-data/driver_standings.csv",
+        "format": {"type": "csv"}
+    },
+    "transform": [
+        {
+            "lookup": "driverId",
+            "from": {
+            "data": {"url": "../f1-data/drivers.csv"},
+            "key": "driverId",
+            "fields": ["forename", "surname"]
+            },
+            "as": ["driverForename", "driverSurname"]
+        },
+        {
+            "calculate": "datum.driverForename + ' ' + datum.driverSurname",
+            "as": "driverName"
+        },
+        {
+            "lookup": "raceId",
+            "from": {
+            "data": {"url": "../f1-data/races.csv"},
+            "key": "raceId",
+            "fields": ["year", "round"]
+            }
+        },
+        {
+            "calculate": "toNumber(datum.round)",
+            "as": "round"
+        },
+        {
+            "filter": "datum.driverId == '1'"
+        },
+        {
+            "joinaggregate": [{
+                "op": "max",
+                "field": "round",
+                "as": "finalRound"
+            }],
+            "groupby": ["year"]
+        },
+        {
+            "filter": "toNumber(datum.round) == toNumber(datum.finalRound)"
+        }
+    ],
+
+    "mark": {"type": "bar"},
+    "encoding": {
+        "y": {
+            "field": "wins",
+            "type": "quantitative",
+            "title": "Grand Prix wins"
+        },
+        "x": {
+            "field": "year",
+            "type": "nominal",
+            "title": "Season"
+        },
+        "tooltip": [
+            {
+                "field": "wins",
+                "title": "Total Grand Prix wins"
+            },
+            {
+                "field": "year"
+            }
+        ]
+    }
+
+    
+}

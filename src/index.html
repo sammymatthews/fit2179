@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>f1 data vis II</title>
+    <link rel="stylesheet" href="./output.css">
+
+    <!-- Import Vega, Vega-Lite & Vega-Embed -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+
+</head>
+
+<body class="max-w-screen h-full bg-gray-900 text-white text-lg font-Play">
+    <h1 class="text-6xl text-center mt-14 font-Monoton">
+        Mapping &nbsp; Formula &nbsp; 1 &nbsp; Success
+    </h1>
+    <div class="flex mx-14 my-8">
+        <p class="columns-2 gap-10">
+            Formula 1 - or more commonly known today as F1 - is the highest level of international motorsport, combining
+            elite driving talent, advanced
+            engineering, and global competition. Since the championship began in 1950, certain countries have
+            consistently played a dominant role in shaping the sport’s history and success. European nations,
+            particularly the United Kingdom and Italy, have been central to Formula One through their long-standing
+            racing traditions, successful teams, iconic circuits, and world championship-winning drivers.
+            <br>
+            However, as the sport expanded across oceans and continents, new circuits, drivers, and constructors have
+            joined from across the globe. Have these international additions been able to rival the European dominance
+            that was seen for so long?
+        </p>
+    </div>
+
+    <!--                 -->
+    <!--    CIRCUITS     -->
+    <!--                 -->
+    <div id="circuits" class="m-14 mt-28">
+        <h2 class="text-5xl text-red-600 font-bold mb-4 font-Racing-Sans-One">
+            The Circuits
+        </h2>
+        <div id="circuitsContent" class="grid grid-cols-2 gap-10 h-fit">
+            <div class="w-full">
+                <!-- left column -->
+                <p class="h-fit mb-10">
+                    The circuits of Formula One reflect the global expansion of the sport, while also highlighting the
+                    countries that have historically played the biggest role in its development. European nations such
+                    as Italy, United Kingdom, Monaco, and Belgium have hosted some of the most iconic and long-running
+                    races in Formula One history, including legendary circuits that remain central to the championship.
+                    Over time, the calendar has expanded across Asia, the Middle East, the Americas, and Oceania,
+                    demonstrating the growing international popularity of the sport.
+                    <br>
+                    <br>
+                    From high-speed straights and tight street corners to dramatic elevation changes and unpredictable
+                    weather conditions, each track presents unique challenges for drivers and teams. Over the decades,
+                    the championship has evolved from traditional European tracks to a global calendar featuring modern
+                    purpose-built venues and legendary street races, reflecting the growth and international appeal of
+                    the sport.
+                </p>
+
+                <div
+                    class="flex flex-col min-w-0 min-h-0 h-fit overflow-hidden rounded-2xl bg-slate-800 shadow shadow-lg">
+                    <div id="circuit-choropleth" class="grow aspect-[2/1] m-1.5 bg-blue-100 rounded-xl overflow-hidden">
+                    </div>
+
+                    <script type="text/javascript">
+                        var spec = '../visualisations/circuit-choropleth.vg.json';
+                        vegaEmbed('#circuit-choropleth', spec).then(function (result) {
+                            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                        }).catch(console.error);
+                    </script>
+
+                    <p class="m-6 mt-4">
+                        Despite the sport's European origins, <strong>the United States of America</strong> holds the
+                        highest number of distinct
+                        circuits that have been used throughout the sport's history.
+                    </p>
+                </div>
+
+            </div>
+            <div
+                class="flex flex-col min-w-0 min-h-0 h-full overflow-hidden mb-10 rounded-2xl bg-slate-700 shadow shadow-lg">
+                <!-- right column -->
+                <div id="circuit_symbol_map" class="h-fit aspect-[10/6] bg-blue-100 rounded-2xl overflow-hidden">
+                </div>
+
+                <script type="text/javascript">
+                    var spec = '../visualisations/circuit-graph-1.vg.json';
+                    vegaEmbed('#circuit_symbol_map', spec).then(function (result) {
+                        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                    }).catch(console.error);
+                </script>
+
+                <p class="m-6 mt-4">
+                    Click on a circuit on the map above to have a look at it further.  (not implemented)
+                </p>
+
+                <h3 class=" m-6 mb-0 font-bold font-Racing-Sans-One text-3xl"> Circuit-Name</h3>
+                <div class="m-6 mt-2 flex flex-col grow min-w-0 min-h-0 overflow-hidden rounded-2xl bg-slate-700">
+                    <div class="flex grow h-full bg-slate-500 rounded-xl overflow-hidden p-3 m-1.5">
+                        <div id="" class="flex w-full bg-slate-500 overflow-hidden justify-center text-center">
+                            visualisation not done
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--                 -->
+    <!--     DRIVERS     -->
+    <!--                 -->
+    <div id="drivers" class="m-14 mt-28">
+        <h2 class="text-5xl text-red-600 font-bold mb-4 font-Racing-Sans-One">
+            The Drivers
+        </h2>
+        <div id="driversContent" class="">
+            <div class="columns-2 gap-10 mb-10">
+                <!-- text -->
+                <p>
+                    The drivers of Formula One come from a wide range of countries, combining skill, precision, and
+                    strategy to compete at the highest level of motorsport. Countries such as the United Kingdom,
+                    Germany, Brazil, and France have consistently contributed world champions and race-winning drivers
+                    throughout different eras of the sport.
+                    <br>
+                    Driver nationalities often reflect the regions with strong motorsport traditions, investment in
+                    racing development, and established junior pathways. Examining the countries represented by drivers
+                    helps reveal how Formula One has evolved from a predominantly European competition into a truly
+                    international sport.
+
+                </p>
+            </div>
+            <div
+                class="flex flex-col min-w-0 min-h-0 h-fit overflow-hidden mb-10 rounded-2xl bg-slate-700 shadow shadow-lg">
+                <!-- right column -->
+                <div id="vis" class="grow m-1.5 bg-blue-100 rounded-xl overflow-hidden aspect-[21/9] "></div>
+
+                <script type="text/javascript">
+                    var spec = '../visualisations/drivers-nationalities-chorepleth.vg.json';
+                    vegaEmbed('#vis', spec).then(function (result) {
+                        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                    }).catch(console.error);
+                </script>
+            </div>
+
+            <div class="grid grid-cols-2 gap-10 mb-10">
+                <div class="h-fit">
+                    <p class="mb-10">
+                        There is no doubt that europeans dominate the competition, however, Americans make up the second
+                        highest proportion of drivers.
+                        <br>
+                        Despite this, when looking at data from 2000-2024, there is a clear German and British dominance
+                        in championship wins.
+                    </p>
+                    <div
+                        class="flex flex-col min-w-0 min-h-0 h-fit overflow-hidden rounded-2xl bg-slate-700 shadow shadow-lg">
+                        <!-- right column -->
+                        <div id="winner_nationalities"
+                            class="grow m-1.5 bg-white rounded-xl overflow-hidden aspect-[3/2]"></div>
+
+                        <script type="text/javascript">
+                            var spec = '../visualisations/winner-nationalities.vg.json';
+                            vegaEmbed('#winner_nationalities', spec).then(function (result) {
+                                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                            }).catch(console.error);
+                        </script>
+                    </div>
+                </div>
+
+                <div
+                    class="flex flex-col min-w-0 min-h-0 h-full overflow-hidden mb-10 rounded-2xl bg-slate-800 shadow shadow-lg">
+                    <!-- right column -->
+                    <div id="driver_nationality_bar"
+                        class="grow m-1.5 bg-white rounded-xl overflow-hidden aspect-[21/18]"></div>
+
+                    <script type="text/javascript">
+                        var spec = '../visualisations/driver-nationalities-bar.vg.json';
+                        vegaEmbed('#driver_nationality_bar', spec).then(function (result) {
+                            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                        }).catch(console.error);
+                    </script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div
+        class="grid grid-cols-2 min-w-0 min-h-0 h-fit overflow-hidden mb-10 rounded-3xl bg-slate-700 p-14 gap-10 shadow shadow-lg">
+        <div class="flex flex-col min-w-0 min-h-0 h-full mb-10">
+            <h2 class="text-2xl font-bold">
+                Driver Dashboard
+            </h2>
+            <p class="mb-6 mt-4">
+                Choose which driver you want to look at in more detail by selecting from the graph below (have not
+                implemented yet).
+            </p>
+            <div id="top-drivers" class="grow aspect-[2/1] bg-white rounded-xl overflow-hidden"></div>
+
+            <script type="text/javascript">
+                var spec = '../visualisations/top-driver-wins-bar.vg.json';
+                vegaEmbed('#top-drivers', spec).then(function (result) {
+                    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                }).catch(console.error);
+            </script>
+
+
+        </div>
+        <div class="flex flex-col min-w-0 min-h-0 h-full overflow-hidden mb-10">
+            <p class="font-bold mb-4">
+                Lewis Hamilton (example)
+            </p>
+
+            <div id="driver_wins_over_time" class="grow aspect-[2/1] bg-white rounded-xl overflow-hidden mb-10"></div>
+
+            <script type="text/javascript">
+                var spec = '../visualisations/driver-wins-over-time.vg.json';
+                vegaEmbed('#driver_wins_over_time', spec).then(function (result) {
+                    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                }).catch(console.error);
+            </script>
+
+            <div class="grid grid-cols-2 gap-10">
+                <div class="flex w-full bg-white rounded-xl overflow-hidden h-fit">
+                    <div id="total_driver_wins" class="grow m-2 aspect-[3/2] bg-white  overflow-hidden"></div>
+
+                    <script type="text/javascript">
+                        var spec = '../visualisations/driver-total-races.vg.json';
+                        vegaEmbed('#total_driver_wins', spec).then(function (result) {
+                            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                        }).catch(console.error);
+                    </script>
+                </div>
+
+                <div class="flex w-full bg-white rounded-xl overflow-hidden h-fit">
+                    <div id="driver_wins_per_team" class="grow m-2 aspect-[3/2] bg-white overflow-hidden"></div>
+
+                    <script type="text/javascript">
+                        var spec = '../driver-wins-constructor-prop.vg.json';
+                        vegaEmbed('#driver_wins_per_team', spec).then(function (result) {
+                            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                        }).catch(console.error);
+                    </script>
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <!--                -->
+    <!-- CONSTRUCTORS   -->
+    <!--                -->
+    <div id="constructors" class="m-14 mt-28">
+        <h2 class="text-5xl text-red-600 font-bold mb-4 font-Racing-Sans-One">
+            The Constructors
+        </h2>
+        <div id="constructorContent" class="grid grid-cols-2 gap-10 h-fit">
+            <div class="">
+                <!-- left column -->
+                <p class="mb-10">
+                    The constructors of Formula One – responsible for designing and developing the cars competing in the
+                    championship – are heavily concentrated in a small number of countries that have strong automotive
+                    and engineering industries.
+                    <br>
+                    <br>
+                    The United Kingdom has historically been the dominant hub for Formula One teams, with many
+                    successful constructors operating from “Motorsport Valley” in England. Other influential nations
+                    include Italy, known for iconic manufacturers and racing heritage, as well as Germany and France,
+                    which have contributed major manufacturers and technical innovation to the sport.
+                    The concentration of constructors in these countries highlights the importance of engineering
+                    expertise, industrial infrastructure, and long-standing motorsport culture in Formula One history.
+
+                </p>
+                <div class="flex flex-col min-w-0 min-h-0 h-fit overflow-hidden rounded-2xl bg-slate-700 shadow">
+                    <!-- right column -->
+                    <div id="constructor_choropleth"
+                        class="h-fit aspect-[10/6] m-1.5 bg-blue-100 rounded-xl overflow-hidden">
+                    </div>
+
+                    <script type="text/javascript">
+                        var spec = '../visualisations/constructor-choropleth.vg.json';
+                        vegaEmbed('#constructor_choropleth', spec).then(function (result) {
+                            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                        }).catch(console.error);
+                    </script>
+
+                    <p class="m-6 mt-4">
+                        Hover over the map to see the number of contructors that originate in each country.
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-col h-full min-w-0 min-h-0 overflow-hidden rounded-2xl bg-slate-700">
+                <div class="flex grow h-full bg-white rounded-xl overflow-hidden p-3 m-1.5">
+                    <div id="constructor_wins" class="w-full aspect-[1/1] bg-white overflow-hidden">
+                    </div>
+
+                    <script type="text/javascript">
+                        var spec = '../visualisations/top-constructor-wins-bar.vg.json';
+                        vegaEmbed('#constructor_wins', spec).then(function (result) {
+                            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                        }).catch(console.error);
+                    </script>
+
+                </div>
+
+                <p class="m-6 mt-4 h-fit">
+                    As the oldest constructor, competing in every F1 season since 1950, it's no surprise that
+                    <strong>Ferrari</strong> holds the highest number Grand Prix wins.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

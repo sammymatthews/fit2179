@@ -1,0 +1,66 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Total Grand Prix Wins per Constructor",
+    "width": "container",
+    "height": "container",
+    "autosize": {"type": "fit"},
+    "background": "transparent",
+    "data": {
+        "url": "../f1-data/results.csv",
+        "format": {"type": "csv"}
+    },
+
+    "transform": [
+        {
+            "lookup": "constructorId",
+            "from": {
+                "data": {"url": "../f1-data/constructors.csv"},
+                "key": "constructorId",
+                "fields": ["name"]
+            },
+            "as": ["constructorName"]
+        },
+        {
+            "filter": "datum.positionOrder == 1"
+        },
+        {
+            "aggregate": [{
+                "op": "sum",
+                "field": "positionOrder",
+                "as": "totalWins"
+            }],
+            "groupby": ["constructorName"]
+        }
+    ],
+    "mark": {"type": "bar"},
+    "encoding": {
+        "y": {
+            "field": "constructorName",
+            "type": "nominal",
+            "sort": {
+                "field": "totalWins",
+                "op": "sum",
+                "order": "descending"
+            },
+            "title": "Constructor Name"
+        },
+        "x": {
+            "field": "totalWins",
+            "type": "quantitative",
+            "title": "Total Grand Prix wins"
+
+        },
+        "tooltip": [
+            {
+                "field": "totalWins",
+                "title": "Total Grand Prix wins"
+            },
+            {
+                "field": "constructorName",
+                "title": "Rank"
+            }
+        ]
+    }
+
+    
+}
