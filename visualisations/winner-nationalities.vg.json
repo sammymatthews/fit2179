@@ -7,7 +7,7 @@
         "type": "fit"
     },
     "data": {
-        "url": "./f1-data/driver_standings.csv",
+        "url": "https://raw.githubusercontent.com/sammymatthews/fit2179/refs/heads/main/f1-data/driver_standings.csv",
         "format": {
             "type": "csv"
         }
@@ -17,7 +17,7 @@
             "lookup": "raceId",
             "from": {
                 "data": {
-                    "url": "./f1-data/races.csv"
+                    "url": "https://raw.githubusercontent.com/sammymatthews/fit2179/refs/heads/main/f1-data/races.csv"
                 },
                 "key": "raceId",
                 "fields": [
@@ -52,7 +52,7 @@
             "lookup": "driverId",
             "from": {
                 "data": {
-                    "url": "./f1-data/drivers.csv"
+                    "url": "https://raw.githubusercontent.com/sammymatthews/fit2179/refs/heads/main/f1-data/drivers.csv"
                 },
                 "key": "driverId",
                 "fields": [
