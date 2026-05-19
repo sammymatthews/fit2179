@@ -7,7 +7,7 @@
         "type": "fit"
     },
     "data": {
-        "url": "../f1-data/drivers_cleaned.csv",
+        "url": "./f1-data/drivers_cleaned.csv",
         "format": {
             "type": "csv"
         }
