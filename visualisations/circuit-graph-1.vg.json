@@ -23,7 +23,7 @@
         },
         {
             "data": {
-                "url": "../f1-data/circuits.csv",
+                "url": "https://raw.githubusercontent.com/sammymatthews/fit2179/refs/heads/main/f1-data/circuits.csv",
                 "format": {"type": "csv"}
             },
             "mark": {
@@ -45,7 +45,7 @@
         },
         {
             "data": {
-                "url": "../f1-data/circuits.csv",
+                "url": "https://raw.githubusercontent.com/sammymatthews/fit2179/refs/heads/main/f1-data/circuits.csv",
                 "format": {"type": "csv"}
             },
             "mark": {
