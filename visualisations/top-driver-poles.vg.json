@@ -4,7 +4,7 @@
     "width": 800,
     "height": 600,
     "data": {
-        "url": "./f1-data/sprint_results.csv",
+        "url": "https://raw.githubusercontent.com/sammymatthews/fit2179/refs/heads/main/f1-data/sprint_results.csv",
         "format": {"type": "csv"}
     },
 
@@ -12,7 +12,7 @@
         {
             "lookup": "driverId",
             "from": {
-                "data": {"url": "./f1-data/drivers.csv"},
+                "data": {"url": "https://raw.githubusercontent.com/sammymatthews/fit2179/refs/heads/main/f1-data/drivers.csv"},
                 "key": "driverId",
                 "fields": ["forename", "surname"]
             },
