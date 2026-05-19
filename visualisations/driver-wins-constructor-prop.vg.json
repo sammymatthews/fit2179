@@ -11,7 +11,7 @@
     },
     "background": "transparent",
     "data": {
-        "url": "../f1-data/results.csv",
+        "url": "./f1-data/results.csv",
         "format": {
             "type": "csv"
         }
@@ -21,7 +21,7 @@
             "lookup": "driverId",
             "from": {
                 "data": {
-                    "url": "../f1-data/drivers.csv"
+                    "url": "./f1-data/drivers.csv"
                 },
                 "key": "driverId",
                 "fields": [
@@ -45,7 +45,7 @@
             "lookup": "constructorId",
             "from": {
                 "data": {
-                    "url": "../f1-data/constructors.csv"
+                    "url": "./f1-data/constructors.csv"
                 },
                 "key": "constructorId",
                 "fields": [
